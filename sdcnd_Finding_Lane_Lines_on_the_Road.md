@@ -25,11 +25,11 @@ The test images have the following format. They are quite simple and except the 
 
 The first step I took was to grayscale the image to make it easier to work, namely to reduce the number of channels to work with. However, when dealing with more challenging images such as lane lines that are on non-contrasting backgrounds (white or gray tarmac), the lane detection pipeline for lane linea detection struggles. In order to improve the performance, I switched to using [hue, saturation, and light](https://en.wikipedia.org/wiki/HSL_and_HSV#HSL) color space, which is better able to highlight the yellow and white lane lines.
 
-_Grayscale_
 ![gray](/step_images/grayscale.png) 
+*Grayscale*
 
-_HSL color space_
 ![hsl](/step_images/hls.png)
+*HSL color space*
 
  In the above image, white and yellow lanes are much better captured compared to the grayscale image. However, to further improve the performance of the processing pipeline, we can also select out the colors that we know we care about. The assumption here is that we will not encounter any lane of "different" colors which is not obvious.
 
@@ -57,9 +57,8 @@ def select_white_and_yellow(image):
 
 In the above code, the first command converts color encoding from RGB to HSL. Then I use the `inRange` function provided by OpenCV to select colors that fall into the white and yellow ranges. After that I combine the white and yellow masks together with the `bitwise_or` function. The result is very helpful for the rest of the pipeline.
 
-_HSL color selection_
 ![hsl](/step_images/yellow_and_white.png)
-
+*HSL color selection*
 
 ## Edge Detection
 
