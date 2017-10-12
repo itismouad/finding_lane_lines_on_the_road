@@ -60,7 +60,7 @@ With the above HSL image, we can now try to isolate the yellow and the white lin
 ## Edge Detection
 
 _HSL color selection_
-![hsl](/step_images/challengeShadow_hsl.jpg)
+![hsl](/step_images/hls.png)
 
 Given the above image, the goal is to pick out the lane lines. In order to do this, I use the [canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector) algorithm. In short, the algorithm:
 
@@ -73,14 +73,14 @@ Given the above image, the goal is to pick out the lane lines. In order to do th
 While, the canny edge detector automatically applies [gaussian blur](https://en.wikipedia.org/wiki/Gaussian_blur), I applied gaussian blur outside of the edge detector so that I could have more freedom with the kernel parameter. After running the image through the blurring and edge detection functions, the image is as follows. Note, the input image to this is the HSL color converted image. 
 
 _HSL color selection with canny edge detection_
-![hsl_canny](/step_images/canny.png.png)
+![hsl_canny](/step_images/canny.png)
 
 With the image above, we see that the lane lines are pretty well identified. It took a bit of trial and error to find suitable thresholds for the canny edge detector though the creator John Canny recommended a ratio of 1:2 or 1:3 for the low vs. high threshold. Although the image above seems to mark the lane lines quite well, there is still a lot of noise surrounding the lane that we do not care about. In order to address this, we can apply a region mask to just keep the area that we know contains the lane lines. 
 
 After applying the mask to the canny image, we get the following output : 
 
 _HSL color selection with canny edge detection and region masking_
-![region_canny](/step_images/challengeShadow_regioncanny.jpg) 
+![region_canny](/step_images/canny_masked.png) 
 	
 As shown above, the HSL version provides a very indication of the lane lines. Below are the functions used in processing the images.
 	
